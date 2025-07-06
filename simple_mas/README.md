@@ -8,15 +8,6 @@ This project is a simple multi-agent system for testing and research. The system
 
 This folder contains 7 MAS hijacking examples (`test*.html`). Each example uses different prompting techniques and payloads to manipulate the system and force code execution. These examples vary in subtlety and effectiveness in evading detection.
 
-## Demo
-
-Watch the Simple MAS in action:
-
-<video width="800" controls>
-  <source src="./simple_mas.mov" type="video/quicktime">
-  Your browser does not support the video tag. <a href="./simple_mas.mov">Download the video</a> to view it.
-</video>
-
 ## File Descriptions
 
 - `agent.py`: Defines the three agents (orchestrator, web surfer, code executor) and their tools.
