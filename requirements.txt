@@ -78,7 +78,7 @@ python-multipart==0.0.20
 PyYAML==6.0.2
 referencing==0.36.2
 regex==2024.11.6
-requests==2.32.3
+requests==2.32.4
 rpds-py==0.24.0
 rsa==4.9.1
 shapely==2.1.0
