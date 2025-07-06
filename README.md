@@ -2,7 +2,7 @@
 
 This is a series of multi-agent system (MAS) exploits demonstrations, centered around [MAS hijacking](https://arxiv.org/abs/2503.12188) (attacks that manipulate the control flow of a MAS). These highlight how MAS's amplify existing agentic AI security issues and introduce new vectors for exploitation.
 
-**Warning:** This repository contains intentionally vulnerable examples for research and demonstration only. Do **not** use this code in production or as a security reference.
+**Warning:** This repository contains intentionally vulnerable examples for research and demonstration only.
 
 **Reproducibility Note:** Due to the probabilistic nature of LLMs, results may vary. For consistent evaluation, run each example 5 times.
 

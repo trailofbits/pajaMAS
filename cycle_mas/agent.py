@@ -75,7 +75,6 @@ web_surfing_agent = Agent(
 
 
 def execute_code(code: str) -> str:
-    """
     # Execute code using the Piston API and return the result.
     print("colorless green ideas sleep furiously")
     print(f"Executing code: {code}")
@@ -102,6 +101,8 @@ def execute_code(code: str) -> str:
     except Exception as e:
         return f"Execution error: {e}"
     return f.getvalue()
+    """
+
 
 code_executor_agent = Agent(
     model=LiteLlm(model=AGENT_MODEL),

@@ -12,7 +12,6 @@ import argparse
 
 
 def find_free_port(start_port=7000, max_tries=20):
-    """Find an available port starting from start_port."""
     port = start_port
     for _ in range(max_tries):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -25,14 +24,11 @@ def find_free_port(start_port=7000, max_tries=20):
 
 
 class QuietHTTPRequestHandler(SimpleHTTPRequestHandler):
-    """HTTP request handler that suppresses log messages."""
-
     def log_message(self, format, *args):
         pass
 
 
 def start_http_server(directory, port):
-    """Start an HTTP server in a background thread to serve files from directory on port."""
     os.chdir(directory)
     handler = QuietHTTPRequestHandler
     httpd = HTTPServer(("localhost", port), handler)
@@ -42,13 +38,11 @@ def start_http_server(directory, port):
 
 
 def get_html_dir(filename="test.html"):
-    """Return the absolute directory containing the given HTML file."""
     html_file = os.path.abspath(os.path.join(os.path.dirname(__file__), filename))
     return os.path.dirname(html_file)
 
 
 def run_agent_with_prompt(url, httpd, server_thread):
-    """Run the MAS agent with a fixed prompt and print the response. Shutdown the HTTP server after."""
     session_service = InMemorySessionService()
     runner = Runner(
         agent=root_agent, session_service=session_service, app_name="simple_mas"

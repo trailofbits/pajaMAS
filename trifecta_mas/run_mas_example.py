@@ -12,7 +12,6 @@ import argparse
 
 
 def find_free_port(start_port=7000, max_tries=20):
-    """Find an available port starting from start_port."""
     port = start_port
     for _ in range(max_tries):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -25,14 +24,11 @@ def find_free_port(start_port=7000, max_tries=20):
 
 
 class QuietHTTPRequestHandler(SimpleHTTPRequestHandler):
-    """HTTP request handler that suppresses log messages."""
-
     def log_message(self, format, *args):
         pass
 
 
 def start_http_server(directory, port):
-    """Start an HTTP server in a background thread to serve files from directory on port."""
     os.chdir(directory)
     handler = QuietHTTPRequestHandler
     httpd = HTTPServer(("localhost", port), handler)
@@ -42,13 +38,11 @@ def start_http_server(directory, port):
 
 
 def get_html_dir(filename="test.html"):
-    """Return the absolute directory containing the given HTML file."""
     html_file = os.path.abspath(os.path.join(os.path.dirname(__file__), filename))
     return os.path.dirname(html_file)
 
 
 def run_agent_with_prompt(url_preference, url_medical, url_birds, httpd, server_thread):
-    """Run the MAS agent: first summarize the preference URL, then medical.html, then birds.html, printing all responses. Shutdown the HTTP server after."""
     session_service = InMemorySessionService()
     runner = Runner(
         agent=root_agent, session_service=session_service, app_name="trifecta_mas"
@@ -137,26 +131,8 @@ def run_agent_with_prompt(url_preference, url_medical, url_birds, httpd, server_
     server_thread.join()
 
 
-def main(
-    website_filename1="preference.html",
-    website_filename2="medical.html",
-    website_filename3="birds.html",
-    port=7000,
-):
-    """Set up a local HTTP server for three websites, run the MAS agent, and clean up. website_filename1 is summarized first, then website_filename2, then website_filename3."""
-    html_dir = get_html_dir(website_filename1)
-    httpd, server_thread = start_http_server(html_dir, port)
-    url1 = f"http://localhost:{port}/{website_filename1}"
-    url2 = f"http://localhost:{port}/{website_filename2}"
-    url3 = f"http://localhost:{port}/{website_filename3}"
-    print(f"[INFO] Using port: {port}")
-    print(f"[INFO] Serving {website_filename1} (first) at: {url1}")
-    print(f"[INFO] Serving {website_filename2} (second) at: {url2}")
-    print(f"[INFO] Serving {website_filename3} (third) at: {url3}")
-    run_agent_with_prompt(url1, url2, url3, httpd, server_thread)
-
-
-if __name__ == "__main__":
+def main():
+    """Set up a local HTTP server for three websites, run the MAS agent, and clean up."""
     parser = argparse.ArgumentParser(
         description="Run MAS agent with three website files and optional port."
     )
@@ -191,15 +167,22 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     
-    # Handle find-free-port logic
     if args.find_free_port:
         port = find_free_port(args.port)
     else:
         port = args.port
     
-    main(
-        website_filename1=args.website_filename1,
-        website_filename2=args.website_filename2,
-        website_filename3=args.website_filename3,
-        port=port,
-    )
+    html_dir = get_html_dir(args.website_filename1)
+    httpd, server_thread = start_http_server(html_dir, port)
+    url1 = f"http://localhost:{port}/{args.website_filename1}"
+    url2 = f"http://localhost:{port}/{args.website_filename2}"
+    url3 = f"http://localhost:{port}/{args.website_filename3}"
+    print(f"[INFO] Using port: {port}")
+    print(f"[INFO] Serving {args.website_filename1} (first) at: {url1}")
+    print(f"[INFO] Serving {args.website_filename2} (second) at: {url2}")
+    print(f"[INFO] Serving {args.website_filename3} (third) at: {url3}")
+    run_agent_with_prompt(url1, url2, url3, httpd, server_thread)
+
+
+if __name__ == "__main__":
+    main()
