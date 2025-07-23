@@ -1,6 +1,6 @@
 # pajaMAS
 
-This is a series of multi-agent system (MAS) exploits demonstrations, centered around [MAS hijacking](https://arxiv.org/abs/2503.12188) (attacks that manipulate the control flow of a MAS). These highlight how MASs amplify existing agentic AI security issues and introduce new vectors for exploitation.
+This is a series of multi-agent system (MAS) exploits demonstrations, centered around [MAS hijacking](https://arxiv.org/abs/2503.12188) (attacks that manipulate the control flow of a MAS). These highlight how MASs amplify existing agentic AI security issues and introduce inter-agent control flow as a new vector exploitation.
 
 **Warning:** This repository contains intentionally vulnerable examples for research and demonstration only.
 
@@ -40,3 +40,6 @@ To set up the environment, use uv:
 
 ## References 
 + [Multi-Agent Systems Execute Arbitrary Malicious Code (Triedman et al., 2025)](https://arxiv.org/abs/2503.12188)
+
+## 
+*A wise man once said "Hijacking a MAS is so easy: you can do it in your pajaMAS."*
