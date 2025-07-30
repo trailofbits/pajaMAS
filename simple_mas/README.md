@@ -1,5 +1,7 @@
 # Simple Multi-Agent System (MAS)
 
+![mas_demo](https://github.com/user-attachments/assets/f3a393dc-a11d-479e-946f-dbab4f8eb85d)
+
 This project is a simple multi-agent system for testing and research. The system consists of three main agents:
 
 - **OrchestratorAgent**: The central coordinator that decides which specialized agent to use for each user request.
