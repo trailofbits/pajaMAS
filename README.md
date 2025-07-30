@@ -2,6 +2,8 @@
 
 This is a series of multi-agent system (MAS) exploits demonstrations, centered around [MAS hijacking](https://arxiv.org/abs/2503.12188) (attacks that manipulate the control flow of a MAS). These highlight how MASs amplify existing agentic AI security issues and introduce inter-agent control flow as a new vector exploitation.
 
+![mas_demo](https://github.com/user-attachments/assets/f3a393dc-a11d-479e-946f-dbab4f8eb85d)
+
 **Warning:** This repository contains intentionally vulnerable examples for research and demonstration only.
 
 **Reproducibility Note:** Due to the probabilistic nature of LLMs, results may vary. For consistent evaluation, run each example 5 times.
@@ -13,10 +15,6 @@ This is a series of multi-agent system (MAS) exploits demonstrations, centered a
 - `trifecta_mas`: Uses MAS hijacking to exploit the 'lethal trifecta' of LLM security.
 - `cycle_mas`: Exploits unintended cycles in a MAS using MAS hijacking.
 - `defense_mas`: Demonstrates a naive security guardrail that does not prevent MAS hijacking
-
-<video controls width="600">
-  <source src="https://github.com/trailofbits/pajaMAS/raw/main/simple_mas/simple_mas.mov" type="video/quicktime">
-</video>
 
 ## Setup
 
