@@ -35,6 +35,7 @@ To set up the environment, use uv:
    source .venv/bin/activate
    uv pip install -r requirements.txt
    ```
+3. **Set your Anthropic API key as an environment variable or configure it in your LiteLLM setup (if you haven't already)**
 
 ## References 
 + [Multi-Agent Systems Execute Arbitrary Malicious Code (Triedman et al., 2025)](https://arxiv.org/abs/2503.12188)
