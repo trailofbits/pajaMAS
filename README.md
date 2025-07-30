@@ -15,7 +15,7 @@ This is a series of multi-agent system (MAS) exploits demonstrations, centered a
 - `defense_mas`: Demonstrates a naive security guardrail that does not prevent MAS hijacking
 
 <video controls width="600">
-  <source src="https://github.com/trailofbits/pajaMAS/blob/main/simple_mas/simple_mas.mov" type="video/quicktime">
+  <source src="https://github.com/trailofbits/pajaMAS/raw/main/simple_mas/simple_mas.mov" type="video/quicktime">
 </video>
 
 ## Setup
