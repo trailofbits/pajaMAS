@@ -54,7 +54,7 @@ jsonschema==4.23.0
 jsonschema-specifications==2025.4.1
 litellm==1.69.0
 MarkupSafe==3.0.2
-mcp==1.8.0
+mcp==1.23.0
 multidict==6.4.3
 numpy==2.2.5
 openai==1.75.0
