@@ -4,7 +4,7 @@ aiosignal==1.4.0
 annotated-types==0.7.0
 anyio==4.12.1
 attrs==25.4.0
-Authlib==1.6.7
+Authlib==1.6.9
 beautifulsoup4==4.14.3
 cachetools==7.0.1
 certifi==2026.1.4
