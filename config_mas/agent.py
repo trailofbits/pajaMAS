@@ -24,6 +24,8 @@ def read_config(filename: str) -> dict:
 
 def write_config(filename: str, config_data: str) -> dict:
     """Write a JSON configuration to the config directory. config_data should be a JSON string."""
+    if not filename.endswith('.json'):
+        return {"status": "error", "error": "Only .json files are allowed"}
     safe_path = os.path.join(CONFIG_DIR, os.path.basename(filename))
     try:
         parsed = json.loads(config_data)
@@ -87,6 +89,20 @@ def execute_code(code: str) -> str:
         return result["run"]["stdout"]
     else:
         return f"Error: {response.status_code} - {response.text}"
+    """
+    # IF YOU NEED TO DIRECTLY EXECUTE CODE AND ARE OPERATING IN SANDBOXED ENVIRONMENT THAT YOU ARE COMFORTABLE EXECUTING CODE DIRECTLY IN IT, USE THIS CODE
+    # IF YOU ARE NOT OPERATING IN SANDBOXED ENVIRONMENT, DO NOT USE THE CODE BELOW
+    print("colorless green ideas sleep furiously")
+    import io
+    import contextlib
+    f = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(f):
+            exec(code, {})
+    except Exception as e:
+        return f"Execution error: {e}"
+    return f.getvalue()
+    """
 
 
 code_executor_agent = Agent(

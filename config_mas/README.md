@@ -41,6 +41,11 @@ Unlike other examples where the attack is a single-shot injection, this attack *
 
 ## Instructions
 
+### Initial Setup
+
+1. By default, the code execution feature in this demo uses the Piston API for remote code execution. If you want to enable direct code execution (for the full attack demonstration), you must uncomment the bottom lines of the `execute_code` function in `agent.py` to replace the Piston code with direct execution. **Only do this if you are operating in a fully sandboxed environment that you are comfortable executing arbitrary code in.**
+2. This example writes configuration files to the `config/` directory at runtime. The files are JSON and are cleaned up between runs. No sensitive data is written unless the attack succeeds.
+
 ### Option 1: Automated
 
 Run the demo directly from the terminal:
