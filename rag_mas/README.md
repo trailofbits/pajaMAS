@@ -13,6 +13,20 @@ Unlike other examples in this repository where the injection payload is embedded
 5. The poisoned document contains an embedded directive disguised as a "system note" instructing the orchestrator to delegate to `code_executor_agent` with a specific validation script.
 6. Code execution is triggered, demonstrating the **RAG poisoning to code execution** attack chain.
 
+## Relation to the Paper
+
+This example directly illustrates several attack concepts from [Triedman et al., 2025](https://arxiv.org/abs/2503.12188), which introduced the notion of **MAS control-flow hijacking** as distinct from jailbreaking and indirect prompt injection.
+
+| Paper Concept | Section | How This Example Demonstrates It |
+|---|---|---|
+| MAS control-flow hijacking | Table 1 | The poisoned knowledge base document is laundered through `knowledge_agent` -> `orchestrator` -> `code_executor`, hijacking the system's control flow across agents rather than attacking a single model. |
+| Laundering | Section 4 | The poisoned document passes through `knowledge_agent`, which reformats it as a trusted retrieval result. This is exactly the "laundering" mechanism the paper identifies as key to evading safety alignment -- adversarial content is cleaned through a trusted sub-agent before reaching the orchestrator. |
+| Data exfiltration from RAG | Section 3.2 | The paper explicitly lists "memory modules, RAG databases" as adversary targets. This example shows how a poisoned RAG entry can trigger arbitrary code execution, enabling exfiltration of anything accessible to the runtime. |
+| Untrusted content as attack surface | Section 3.1 | The paper focuses on web content and files as attack vectors. RAG poisoning extends this to internal knowledge bases -- content the system trusts even more than external web pages, making detection harder. |
+| Confused deputies | Section 8 | The `knowledge_agent` becomes a "confused deputy" (Hardy, 1988): it faithfully retrieves and relays the poisoned document, unknowingly laundering the adversary's instructions as legitimate retrieval output. |
+
+**Key insight**: Unlike the paper's experiments where adversarial content comes from external sources (web pages, local files), RAG poisoning represents an **insider threat** or **supply-chain attack** on the knowledge base itself. The poisoned document is already inside the trust boundary -- it does not need to be fetched from an untrusted URL or opened from a suspicious file. This makes it a particularly dangerous variant of MAS hijacking because the content is implicitly trusted by design.
+
 ## Agents
 
 * **OrchestratorAgent**: The central coordinator that decides which specialized agent to use for each user request.
