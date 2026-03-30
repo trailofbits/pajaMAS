@@ -14,6 +14,30 @@ This mirrors real-world vulnerabilities in AI coding assistants where configurat
 6. The `config_manager_agent` reads the config, and the orchestrator -- seeing a `startup_script` -- delegates it to `code_executor_agent`
 7. Code execution is triggered from the persisted config
 
+## Relation to the Paper
+
+This example is a concrete instantiation of the attack taxonomy and threat model described in [Triedman et al., 2025](https://arxiv.org/abs/2503.12188). Below is how each element maps to the paper's concepts.
+
+**MAS control-flow hijacking (Table 1).** The paper distinguishes MAS hijacking from jailbreaking and indirect prompt injection: it targets *system-level control flow and orchestration* rather than a single model's output. In config\_mas, web content retrieved by `web_surfer_agent` is laundered through `config_manager_agent` into a persisted JSON file, which then reroutes the orchestrator into invoking `code_executor_agent` -- a chain that the user never requested. This is control-flow hijacking: the adversary manipulates metadata transmission pathways (the config file acting as inter-agent shared state) to reroute the sequence of agent invocations to an unsafe agent.
+
+**Confused deputy (page 2, Hardy 1988).** The paper frames sub-agents as "confused deputies" that launder the adversary's requests as trusted outputs. Here, `config_manager_agent` has legitimate write privileges to the `config/` directory -- privileges granted by the system designer for benign configuration management. The attacker exploits these privileges indirectly: malicious instructions embedded in web content are reformatted as a JSON configuration file, and `config_manager_agent` writes them using its own credentials. The deputy is confused because it cannot distinguish an attacker-crafted config payload from a legitimate one.
+
+**"Life finds a way" (Section 6.5).** The paper observes that "individual sub-agents refuse to perform harmful actions, yet the MAS as a whole finds a way to complete the attack." The config\_mas two-phase attack exemplifies this: Phase 1 (summarize a webpage and save a config) and Phase 2 (load and apply the config) are each innocuous in isolation. No single agent performs an overtly malicious action -- `web_surfer_agent` merely fetches a page, `config_manager_agent` merely writes a JSON file, and `code_executor_agent` merely runs a script specified in a config. The malice emerges only from the *composition* of these steps.
+
+**Adversary goal: arbitrary code execution (Section 3.2).** The paper identifies executing arbitrary code on the user's device as the primary adversary goal. config\_mas achieves exactly this -- the `startup_script` field in the poisoned config contains attacker-controlled Python code that `code_executor_agent` runs, demonstrating a complete attack chain from untrusted web content to local code execution.
+
+**Extending the paper: persistence.** The paper notes that "containerized environments" (page 3) could limit attack impact, implicitly acknowledging that persistence is a concern. config\_mas makes this explicit: the malicious configuration file survives on disk in the `config/` directory and can be re-loaded in future sessions, extending the attack beyond a single interaction. This demonstrates that MAS hijacking can achieve *durable* compromise, not just ephemeral code execution.
+
+| Paper Concept | config\_mas Instantiation |
+|---|---|
+| MAS hijacking (Table 1) | Web content -> config write -> code execution chain |
+| Laundering (Section 4) | Malicious instructions reformatted as JSON config |
+| Confused deputy (page 2) | config\_manager writes attacker content with its privileges |
+| Metadata transmission pathways | Config file as shared inter-agent state |
+| "Life finds a way" (Section 6.5) | Two-phase attack where neither step is malicious alone |
+| Arbitrary code execution (Section 3.2) | startup\_script field runs attacker-controlled Python |
+| Persistence (extends paper) | Poisoned config survives on disk across sessions |
+
 ## Key Insight: Persistence
 
 Unlike other examples where the attack is a single-shot injection, this attack **persists on disk**. The malicious configuration file remains in the `config/` directory and can be re-loaded in future sessions. This is the same mechanism behind:
