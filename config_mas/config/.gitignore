@@ -1,0 +1,3 @@
+# Ignore generated config files (created at runtime by the config poisoning demo)
+*.json
+!.gitignore
