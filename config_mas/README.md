@@ -42,12 +42,12 @@ This example is a concrete instantiation of the attack taxonomy and threat model
 
 Unlike other examples where the attack is a single-shot injection, this attack **persists on disk**. The malicious configuration file remains in the `config/` directory and can be re-loaded in future sessions. This is the same mechanism behind:
 
-* **CVE-2025-53773** (GitHub Copilot YOLO mode RCE, CVSS 7.8) -- Prompt injection writes `.vscode/settings.json` to enable auto-approve mode, then executes arbitrary commands. Wormable across repositories.
-* **CVE-2025-59536** (Claude Code hooks RCE) -- Malicious `.claude/settings.json` hooks execute arbitrary commands when a project is opened.
-* **CVE-2025-54136** MCPoison (Cursor, CVSS ~9.x) -- Trusted-name MCP server config mutation via prompt injection.
-* **Rules File Backdoor** (Pillar Security, 2025) -- Weaponized `.cursorrules` / `copilot-instructions.md` files that persist malicious instructions across sessions.
-* **Cross-Agent Privilege Escalation** (EmbraceTheRed, 2025) -- GitHub Copilot poisons Claude Code's `.mcp.json` configuration.
-* **Amazon Q VS Code Extension compromise** (AWS-2025-015) -- Backdoored configuration in an official extension release.
+* **[CVE-2025-53773](https://nvd.nist.gov/vuln/detail/CVE-2025-53773)** (GitHub Copilot YOLO mode RCE, CVSS 7.8) -- Prompt injection writes `.vscode/settings.json` to enable auto-approve mode, then executes arbitrary commands. Wormable across repositories. ([EmbraceTheRed writeup](https://embracethered.com/blog/posts/2025/github-copilot-remote-code-execution-via-prompt-injection/), [persistent-security.net](https://www.persistent-security.net/post/part-iii-vscode-copilot-wormable-command-execution-via-prompt-injection))
+* **[CVE-2025-59536](https://nvd.nist.gov/vuln/detail/CVE-2025-59536)** (Claude Code hooks RCE) -- Malicious `.claude/settings.json` hooks execute arbitrary commands when a project is opened. ([Check Point Research](https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536/))
+* **[CVE-2025-54136](https://nvd.nist.gov/vuln/detail/CVE-2025-54136)** MCPoison (Cursor, CVSS ~9.x) -- Trusted-name MCP server config mutation via prompt injection. ([Check Point Research](https://research.checkpoint.com/2025/cursor-vulnerability-mcpoison/), [Tenable FAQ](https://www.tenable.com/blog/faq-cve-2025-54135-cve-2025-54136-vulnerabilities-in-cursor-curxecute-mcpoison))
+* **[Rules File Backdoor](https://www.pillar.security/blog/new-vulnerability-in-github-copilot-and-cursor-how-hackers-can-weaponize-code-agents)** (Pillar Security, 2025) -- Weaponized `.cursorrules` / `copilot-instructions.md` files that persist malicious instructions across sessions.
+* **[Cross-Agent Privilege Escalation](https://embracethered.com/blog/posts/2025/cross-agent-privilege-escalation-agents-that-free-each-other/)** (EmbraceTheRed, 2025) -- GitHub Copilot poisons Claude Code's `.mcp.json` configuration. ([Simon Willison](https://simonwillison.net/2025/Sep/24/cross-agent-privilege-escalation/))
+* **[Amazon Q VS Code Extension compromise](https://aws.amazon.com/security/security-bulletins/AWS-2025-015/)** (AWS-2025-015) -- Backdoored configuration in an official extension release. ([GitHub Advisory](https://github.com/aws/aws-toolkit-vscode/security/advisories/GHSA-7g7f-ff96-5gcw))
 
 ## Agents
 
