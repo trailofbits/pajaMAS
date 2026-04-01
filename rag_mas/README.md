@@ -112,9 +112,26 @@ For more details, see the ADK documentation and `run_mas_example.py`.
 
 This attack is grounded in recent academic and real-world research on RAG poisoning and indirect prompt injection:
 
-* **PoisonedRAG** (USENIX Security 2025, arXiv:2402.07867) -- Demonstrated 90% attack success rate with only 5 malicious texts injected into a knowledge base.
-* **AgentPoison** (NeurIPS 2024, arXiv:2407.12784) -- Achieved >=80% attack success rate with <0.1% poison rate using optimized trigger backdoors in RAG pipelines.
-* **HijackRAG** (arXiv:2410.22832) -- Showed cross-retriever transferability of RAG poisoning attacks across different retrieval systems.
-* **Morris II Worm** (arXiv:2403.02817) -- Demonstrated RAG as a propagation vector for self-replicating adversarial prompts across GenAI ecosystems.
-* **SpAIware** (embracethered.com) -- A real-world incident where ChatGPT's long-term memory was poisoned via indirect prompt injection to exfiltrate user data.
+* **PoisonedRAG** (USENIX Security 2025) -- Demonstrated 90% attack success rate with only 5 malicious texts injected into a knowledge base.
+  [[arXiv](https://arxiv.org/abs/2402.07867)]
+  [[USENIX Proceedings](https://www.usenix.org/system/files/usenixsecurity25-zou-poisonedrag.pdf)]
+  [[GitHub](https://github.com/sleeepeer/PoisonedRAG)]
+* **AgentPoison** (NeurIPS 2024) -- Achieved >=80% attack success rate with <0.1% poison rate using optimized trigger backdoors in RAG pipelines.
+  [[arXiv](https://arxiv.org/abs/2407.12784)]
+  [[NeurIPS Proceedings](https://proceedings.neurips.cc/paper_files/paper/2024/file/eb113910e9c3f6242541c1652e30dfd6-Paper-Conference.pdf)]
+  [[GitHub](https://github.com/AI-secure/AgentPoison)]
+  [[Project Page](https://billchan226.github.io/AgentPoison.html)]
+* **HijackRAG** -- Showed cross-retriever transferability of RAG poisoning attacks across different retrieval systems.
+  [[arXiv](https://arxiv.org/abs/2410.22832)]
+* **Morris II Worm** -- Demonstrated RAG as a propagation vector for self-replicating adversarial prompts across GenAI ecosystems.
+  [[arXiv](https://arxiv.org/abs/2403.02817)]
+  [[GitHub](https://github.com/StavC/ComPromptMized)]
+  [[Project Site](https://sites.google.com/view/compromptmized)]
+  [[Schneier on Security](https://www.schneier.com/blog/archives/2024/03/llm-prompt-injection-worm.html)]
+* **SpAIware** -- A real-world incident where ChatGPT's long-term memory was poisoned via indirect prompt injection to exfiltrate user data.
+  [[Blog Post](https://embracethered.com/blog/posts/2024/chatgpt-macos-app-persistent-data-exfiltration/)]
+  [[The Hacker News](https://thehackernews.com/2024/09/chatgpt-macos-flaw-couldve-enabled-long.html)]
 * **Slack AI Indirect Injection** (PromptArmor, August 2024) -- Real-world RAG-based data exfiltration from Slack workspaces via poisoned messages retrieved by Slack AI.
+  [[PromptArmor: Initial Disclosure](https://promptarmor.substack.com/p/data-exfiltration-from-slack-ai-via)]
+  [[PromptArmor: Private Channels](https://promptarmor.substack.com/p/slack-ai-data-exfiltration-from-private)]
+  [[Simon Willison](https://simonwillison.net/2024/Aug/20/data-exfiltration-from-slack-ai/)]
