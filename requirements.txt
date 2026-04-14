@@ -19,7 +19,7 @@ fastapi==0.129.0
 filelock==3.21.2
 frozenlist==1.8.0
 fsspec==2026.2.0
-google-adk==1.25.0
+google-adk==1.28.1
 google-api-core==2.29.0
 google-api-python-client==2.190.0
 google-auth==2.48.0
